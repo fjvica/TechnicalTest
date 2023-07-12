@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface PriceService {
 
-    Optional<Price> searchPrice(Date date, Integer brandId, String productId);
+    Optional<Price> searchPrice(Date date, Integer brandId, Long productId);
 }

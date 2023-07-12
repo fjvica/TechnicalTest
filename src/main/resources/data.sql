@@ -1,7 +1,7 @@
 CREATE TABLE PRICE (
   brand_id INT NOT NULL,
-  start_date DATE NOT NULL,
-  end_date DATE NOT NULL,
+  start_date TIMESTAMP NOT NULL,
+  end_date TIMESTAMP NOT NULL,
   price_list INT NOT NULL,
   product_id INT NOT NULL,
   priority INT NOT NULL,
@@ -9,8 +9,6 @@ CREATE TABLE PRICE (
   curr varchar(3) NOT NULL,
   PRIMARY KEY (product_id, price_list)
 );
-
-
 INSERT INTO PRICE (
   brand_id,
   start_date,

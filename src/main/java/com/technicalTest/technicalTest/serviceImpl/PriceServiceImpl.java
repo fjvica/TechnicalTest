@@ -16,7 +16,7 @@ public class PriceServiceImpl implements PriceService {
     private PriceRepository priceRepository;
 
     @Override
-    public Optional<Price> searchPrice(Date date, Integer brandId, String productId) {
+    public Optional<Price> searchPrice(Date date, Integer brandId, Long productId) {
 
         return priceRepository.searchPrice(date, brandId, productId);
 
