@@ -52,7 +52,7 @@ VALUES (
 (
   1,
   PARSEDATETIME('15-06-2020-16.00.00','dd-MM-yyyy-HH.mm.ss'),
-  PARSEDATETIME('31-12-2020-23.59.59','dd-MM-yyyy-HH.mm.ss'),
+  PARSEDATETIME('15-06-2020-23.59.59','dd-MM-yyyy-HH.mm.ss'),
   4,
   35455,
   1,

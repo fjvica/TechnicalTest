@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,7 +35,7 @@ public class TechnicalTestController {
             var result = priceService.searchPrice(datetime, brandId, productId);
 
             if (result.isPresent()){
-                return ResponseEntity.status(HttpStatus.OK).body(result);
+                return ResponseEntity.status(HttpStatus.OK).body(result.get());
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Price not found");
             }
