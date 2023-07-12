@@ -1,11 +1,18 @@
 package com.technicalTest.technicalTest.controller;
 
+import com.technicalTest.technicalTest.model.Price;
 import com.technicalTest.technicalTest.service.PriceService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,7 +27,18 @@ public class TechnicalTestController {
         this.priceService = priceService;
     }
 
-
+    @Operation(summary = "Get a price")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Get a price from BBDD",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Price.class)) }),
+            @ApiResponse(responseCode = "404", description = "Price not found in BBDD",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class)) }),
+            @ApiResponse(responseCode = "500", description = "Error parsing date",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class)) })}
+    )
     @GetMapping(value = "/priceData/{date}/{brandId}/{productId}")
     public ResponseEntity searchPrice(@PathVariable(value = "date") String date,
                                        @PathVariable(value = "brandId") Integer brandId,
