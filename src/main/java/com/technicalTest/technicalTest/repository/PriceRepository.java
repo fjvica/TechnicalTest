@@ -11,10 +11,20 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.Optional;
 
+/**
+ * Repository
+ */
 @Repository
 @Transactional
 public interface PriceRepository extends JpaRepository<Price, PricePK> {
 
+    /**
+     * Method thats brings the price from bbdd
+     * @param date string date
+     * @param brandId foreign key
+     * @param productId product Id
+     * @return Optional empty or Optional with a price
+     */
     @Query(
             value = "SELECT * FROM PRICE p " +
                     "WHERE p.start_date <= :date " +

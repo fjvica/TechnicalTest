@@ -7,6 +7,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +21,34 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Price Controller
+ */
 @RestController("/")
 public class TechnicalTestController {
 
+    private static Logger log = LoggerFactory.getLogger(TechnicalTestController.class);
+
+    /**
+     * Search price Service
+     */
     private final PriceService priceService;
 
+    /**
+     * Constructor
+     * @param priceService Search price Service
+     */
     TechnicalTestController(PriceService priceService) {
         this.priceService = priceService;
     }
 
+    /**
+     * Method that process inputs and search a price in bbdd
+     * @param date string date
+     * @param brandId foreign key
+     * @param productId product Id
+     * @return ResponseEntity with the result
+     */
     @Operation(summary = "Get a price")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Get a price from BBDD",
@@ -60,6 +82,7 @@ public class TechnicalTestController {
 
         }
         catch (ParseException e) {
+            log.error("ErrorError parsing date: {}", e.getMessage());
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error parsing date, required the next format: yyyy-MM-dd-HH.mm.ss");
